@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTIX - Help Center</title>
+    <link rel="stylesheet" href="shop.css">
+</head>
+<body class="sx-page">
+    <main class="page">
+        <section class="page-head">
+            <p class="kicker">SPORTIX</p>
+            <h1>Help Center</h1>
+            <p>Find quick answers or talk to our support team.</p>
+        </section>
+
+        <section class="help-grid">
+            <div class="card"><h3>Track an order</h3><p>Follow your delivery with your tracking ID.</p><p style="margin-top:14px"><a class="btn outline" href="track.html">Track Order</a></p></div>
+            <div class="card"><h3>Returns</h3><p>Return unused items within 7 days.</p><p style="margin-top:14px"><a class="btn outline" href="return-policy.html">Return Policy</a></p></div>
+            <div class="card"><h3>Contact us</h3><p>Phone: +880 1700-000000<br>Email: support@sportix.example<br>Sat–Thu, 10 AM – 8 PM</p></div>
+        </section>
+
+        <section class="section-narrow" id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="acc-item"><button class="acc-q" aria-expanded="false">How do I place an order?</button><div class="acc-a">Add products to your cart from the Shop page, open the cart, and press Proceed to Checkout. You need a free account to place an order.</div></div>
+            <div class="acc-item"><button class="acc-q" aria-expanded="false">Which payment methods do you accept?</button><div class="acc-a">bKash, Nagad, debit or credit cards, and Cash on Delivery.</div></div>
+            <div class="acc-item"><button class="acc-q" aria-expanded="false">How much is delivery and how long does it take?</button><div class="acc-a">Delivery costs ৳100 per order. Dhaka orders usually arrive in 1–2 working days, and other districts in 3–5 working days.</div></div>
+            <div class="acc-item"><button class="acc-q" aria-expanded="false">How can I track my order?</button><div class="acc-a">Open Track Order and enter the ID from your confirmation (for example SPX-AB12CD). If you are logged in, your recent orders appear there too.</div></div>
+            <div class="acc-item"><button class="acc-q" aria-expanded="false">Can I change or cancel an order?</button><div class="acc-a">Yes, before it is shipped. Contact support with your tracking ID and we will update or cancel it.</div></div>
+            <div class="acc-item"><button class="acc-q" aria-expanded="false">What if my item arrives damaged?</button><div class="acc-a">Message us within 48 hours with your tracking ID and a photo. We will replace the item or refund you. See the Return Policy for details.</div></div>
+            <div class="acc-item"><button class="acc-q" aria-expanded="false">I forgot my password. What should I do?</button><div class="acc-a">Password reset is not available yet. Contact support and we will help you recover your account, or register with a new email.</div></div>
+        </section>
+
+        <section class="section-narrow card" id="support">
+            <h2>Contact Support</h2>
+            <form id="support-form" novalidate>
+                <div class="form-grid">
+                    <div class="field"><label for="s-name">Your name</label><input id="s-name" type="text"><p class="err"></p></div>
+                    <div class="field"><label for="s-email">Email</label><input id="s-email" type="email"><p class="err"></p></div>
+                    <div class="field full"><label for="s-topic">Topic</label>
+                        <select id="s-topic"><option>Order issue</option><option>Payment</option><option>Return or refund</option><option>Account</option><option>Other</option></select></div>
+                    <div class="field full"><label for="s-msg">How can we help?</label><textarea id="s-msg" rows="4"></textarea><p class="err"></p></div>
+                </div>
+                <button class="btn" type="submit">Send message</button>
+                <p id="support-done" class="hidden" style="margin-top:14px;font-weight:bold">Message sent. We reply within one working day.</p>
+            </form>
+        </section>
+    </main>
+
+    <script src="shop.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const { $, get, set, setError, currentUser } = window.Sportix;
+        const u = currentUser();
+        if (u) { $("#s-name").value = u.name; $("#s-email").value = u.email; }
+        $("#support-form").addEventListener("submit", e => {
+            e.preventDefault();
+            const ok = [
+                setError($("#s-name"), $("#s-name").value.trim().length >= 2 ? "" : "Enter your name."),
+                setError($("#s-email"), /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($("#s-email").value.trim()) ? "" : "Enter a valid email address."),
+                setError($("#s-msg"), $("#s-msg").value.trim().length >= 10 ? "" : "Please write at least 10 characters.")
+            ];
+            if (ok.includes(false)) return;
+            const list = get("sportix_messages", []);
+            list.push({ name: $("#s-name").value.trim(), email: $("#s-email").value.trim(), topic: $("#s-topic").value, message: $("#s-msg").value.trim(), at: Date.now() });
+            set("sportix_messages", list);
+            $("#s-msg").value = ""; $("#support-done").classList.remove("hidden");
+        });
+    });
+    </script>
+</body>
+</html>
