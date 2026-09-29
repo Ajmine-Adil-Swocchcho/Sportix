@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTIX - Track Order</title>
+    <link rel="stylesheet" href="shop.css">
+</head>
+<body class="sx-page">
+    <main class="page">
+        <section class="page-head">
+            <p class="kicker">SPORTIX</p>
+            <h1>Track Your Order</h1>
+            <p>Enter the tracking ID from your order confirmation.</p>
+        </section>
+
+        <form class="track-box" id="track-form">
+            <input type="text" id="track-input" placeholder="e.g. SPX-AB12CD" aria-label="Order tracking ID" autocomplete="off">
+            <button class="btn" type="submit">Track</button>
+        </form>
+
+        <section class="track-result">
+            <div class="card" id="my-orders"></div>
+            <div id="result"></div>
+            <p class="updated" style="text-align:center;margin-top:18px">Demo tip: try the sample ID <strong>SPX-DEMO</strong>. Delivery progress is simulated and runs fast for demonstration.</p>
+        </section>
+    </main>
+
+    <script src="shop.js"></script>
+    <script src="track.js"></script>
+</body>
+</html>

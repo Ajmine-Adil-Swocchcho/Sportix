@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTIX - Cart</title>
+    <link rel="stylesheet" href="shop.css">
+</head>
+<body class="sx-page">
+    <main class="page">
+        <section class="page-head" id="page-head">
+            <p class="kicker">SPORTIX</p>
+            <h1>Your Cart</h1>
+            <p>Review your items, then check out.</p>
+        </section>
+
+        <!-- CART + SUMMARY -->
+        <div class="cart-layout" id="cart-view">
+            <section class="card" id="cart-items"></section>
+            <aside class="card" id="cart-summary">
+                <h2>Order Summary</h2>
+                <div class="sum-row"><span>Subtotal</span><span id="sum-sub">৳0</span></div>
+                <div class="sum-row"><span>Delivery</span><span id="sum-del">৳0</span></div>
+                <div class="sum-row total"><span>Total</span><span id="sum-total">৳0</span></div>
+                <button class="btn full" id="checkout-btn">Proceed to Checkout</button>
+            </aside>
+        </div>
+
+        <!-- CHECKOUT -->
+        <section class="card hidden" id="checkout" style="max-width:1100px;margin:25px auto 0;">
+            <h2>Checkout</h2>
+            <form id="checkout-form" novalidate>
+                <div class="form-grid">
+                    <div class="field"><label for="c-name">Full name</label><input id="c-name" type="text" autocomplete="name"><p class="err"></p></div>
+                    <div class="field"><label for="c-phone">Mobile number</label><input id="c-phone" type="tel" placeholder="01XXXXXXXXX" autocomplete="tel"><p class="err"></p></div>
+                    <div class="field full"><label for="c-address">Delivery address</label><textarea id="c-address" rows="2" placeholder="House, road, area"></textarea><p class="err"></p></div>
+                    <div class="field"><label for="c-city">City / District</label><input id="c-city" type="text" placeholder="e.g. Dhaka"><p class="err"></p></div>
+                    <div class="field"><label for="c-post">Postal code</label><input id="c-post" type="text" inputmode="numeric" placeholder="e.g. 1212"><p class="err"></p></div>
+                </div>
+
+                <h2 style="margin-top:10px">Payment Method</h2>
+                <div class="pay-options">
+                    <label class="pay-option"><input type="radio" name="pay" value="bKash" checked> bKash</label>
+                    <label class="pay-option"><input type="radio" name="pay" value="Nagad"> Nagad</label>
+                    <label class="pay-option"><input type="radio" name="pay" value="Card"> Debit / Credit Card</label>
+                    <label class="pay-option"><input type="radio" name="pay" value="Cash on Delivery"> Cash on Delivery</label>
+                </div>
+
+                <div class="pay-panel" id="pay-mobile">
+                    <p class="note" id="mobile-note"></p>
+                    <div class="field"><label for="p-number">Your <span id="mobile-name">bKash</span> number</label><input id="p-number" type="tel" placeholder="01XXXXXXXXX"><p class="err"></p></div>
+                    <div class="field"><label for="p-trx">Transaction ID</label><input id="p-trx" type="text" placeholder="e.g. 9K4D7XQ2LM"><p class="err"></p></div>
+                </div>
+                <div class="pay-panel hidden" id="pay-card">
+                    <p class="note">Demo only: card details are checked for format and never saved.</p>
+                    <div class="field"><label for="k-number">Card number</label><input id="k-number" type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" autocomplete="off"><p class="err"></p></div>
+                    <div class="form-grid">
+                        <div class="field"><label for="k-exp">Expiry (MM/YY)</label><input id="k-exp" type="text" placeholder="08/28" autocomplete="off"><p class="err"></p></div>
+                        <div class="field"><label for="k-cvv">CVV</label><input id="k-cvv" type="password" inputmode="numeric" placeholder="123" autocomplete="off"><p class="err"></p></div>
+                    </div>
+                </div>
+                <div class="pay-panel hidden" id="pay-cod">
+                    <p class="note" style="margin:0">Pay in cash when your order arrives. Please keep the exact amount ready.</p>
+                </div>
+
+                <p class="form-msg" id="checkout-msg"></p>
+                <button class="btn full" type="submit" id="place-order">Place Order</button>
+            </form>
+        </section>
+
+        <!-- SUCCESS -->
+        <section class="card success hidden" id="success">
+            <h2>Order placed. Thank you!</h2>
+            <p>Your tracking ID is</p>
+            <div class="oid" id="success-id"></div>
+            <p>Save this ID. You can use it on the Track Order page to follow your delivery.</p>
+            <p style="margin-top:18px"><a class="btn" id="success-track" href="track.html">Track this order</a>
+            <a class="btn outline" href="products.html">Continue shopping</a></p>
+        </section>
+    </main>
+
+    <!-- ORDER IMPORTANT: shop.js age, cart.js pore -->
+    <script src="shop.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
